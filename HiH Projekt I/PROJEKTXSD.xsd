@@ -1,0 +1,193 @@
+﻿<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+	<xs:element name="website">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="topic"/>
+				<xs:element ref="content"/>
+				<xs:element ref="gallery"/>
+				<xs:element ref="links"/>
+				<xs:element name="survey" type="surveyType"/>
+				<xs:element name="menu" type="menuType"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="topic">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="title" type="shorttext"/>
+				<xs:element name="author" type="authortype"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="authortype">
+		<xs:all>
+			<xs:element name="name" type="shorttext"/>
+			<xs:element name="surname" type="shorttext"/>
+			<xs:element name="studentid" type="shortint"/>
+		</xs:all>
+	</xs:complexType>
+
+	<xs:element name="content">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="introduction" type="introductionType"/>
+				<xs:element name="favouritebands" type="bandsType"/>
+				<xs:element name="favouritesongs" type="songsType"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:complexType name="introductionType">
+		<xs:sequence>
+			<xs:element name="headline" type="shorttext"/>
+			<xs:element name="description" type="xs:string"/>
+			<xs:element name="aboutlist">
+				<xs:simpleType>
+					<xs:list itemType="shorttext"/>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="bandsType">
+		<xs:sequence>
+			<xs:element name="band" minOccurs="1" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="description" type="xs:string"/>
+					</xs:sequence>
+					<xs:attribute name="rank" type="xs:integer" use="required"/>
+					<xs:attribute name="name" type="shorttext" use="required"/>
+					<xs:attribute name="performer" type="performerType"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:simpleType name="performerType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="band|solo"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:complexType name="songsType">
+		<xs:sequence>
+			<xs:element name="topsongs">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="song" minOccurs="1" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:attribute name="rank" type="xs:integer" use="required"/>
+								<xs:attribute name="title" type="xs:string" use="required"/>
+								<xs:attribute name="artist" type="shorttext" use="required"/>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="gallery">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="photos">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="photo" minOccurs="1" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:attributeGroup ref="sources"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:attributeGroup name="sources">
+		<xs:attribute name="source" type="xs:anyURI" use="required"/>
+		<xs:attribute name="label" type="longtext" use="required"/>
+	</xs:attributeGroup>
+
+	<xs:element name="links">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="link" minOccurs="1" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:attributeGroup ref="sources"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="surveyType">
+		<xs:sequence>
+			<xs:element name="question" minOccurs="1" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="text" type="unionType"/>
+						<xs:element name="response">
+							<xs:complexType>
+								<xs:attribute name="type" type="responseType" use="required"/>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+					<xs:attribute name="id" type="xs:string" use="required"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>				
+	</xs:complexType>
+	
+	<xs:simpleType name="unionType">
+		<xs:union memberTypes="shorttext longtext"/>
+	</xs:simpleType>
+	
+	<xs:simpleType name="responseType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="text"/>
+			<xs:enumeration value="numeric"/>
+			<xs:enumeration value="selection"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="menuType">	
+		<xs:sequence>
+			<xs:element name="option" minOccurs="1" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:string">
+							<xs:attribute name="id" type="xs:string" use="required"/>
+							<xs:attribute name="reference" type="shorttext" use="required"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:simpleType name="shorttext">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="longtext">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="10"/>
+			<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="shortint">
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+</xs:schema>

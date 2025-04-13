@@ -1,0 +1,221 @@
+﻿*{
+    font-family: 'Times New Roman';
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+#header {
+    top: 0;
+    position: sticky;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: #5A2A27;
+    color: #A5978B;
+    width: 100%;
+    height: 15vh;
+    font-size: 3vh;
+    background-image: url('skura.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: brightness(1.25);
+
+}
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 50vh;
+    width: 100%;
+    align-items: center;
+    
+}
+
+#content {
+    font-size: 3vh;
+    background: linear-gradient(180deg, #344E41, #5C4742);
+    color: #DAD7CD;
+    width: 70%;
+    height: inherit;
+    display: flex;
+    align-items: center;
+    text-align: justify;
+    justify-content: center;
+}
+.widownia{
+    height: inherit;
+    width: 30%;
+}
+.widownia:hover{
+    transform: scale(1.2);
+}
+#introduction {
+    flex-direction: column;
+    text-align: center;
+    background: linear-gradient(180deg, #5C4742, #5A2A27);
+    color: #C4BBAF;
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    text-align: justify;
+    justify-content: center;
+    font-size: 2.4vh;
+}
+
+#content2 {
+    background-color: #A3B18A;
+    color: antiquewhite;
+    width: 70%;
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: justify;
+}
+
+#fotter {
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #5A2A27;
+    color: #A5978B;
+    width: 100%;
+    height: 10vh;
+    font-size: 3vh;
+    background-image: url('skura.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: brightness(1.25);
+}
+
+#survey {
+    background-color: #A3B18A;
+    color: antiquewhite;
+    width: 100%;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.table {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.subpagelink {
+    color: antiquewhite;
+    font-size: 3vh;
+    text-decoration: none;
+}
+
+#word {
+    color: #DAD7CD;
+}
+
+.zdjecie {
+    height: inherit;
+    width: 30%;
+}
+.zdjecie:hover {
+    transform: scale(1.2);
+}
+.text{
+    width: 70%;
+    font-size: 3vh;
+}
+.tekst{
+    width: 70%;
+    font-size: 3vh;
+}
+.title {
+    background-color: #5A2A27;
+    color: antiquewhite;
+    text-align: center;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+p::first-letter{
+    font-size:2em;
+}
+
+.top {
+    display: none;
+    position: absolute;
+    top: 0;
+}
+.menuelement {
+    display: flex;
+    flex-direction: row;
+    height: auto;
+    
+}
+.answers{
+    display: flex;
+    align-items: center;
+}
+
+/*Second size for width 800px to 600px*/
+@media screen and (max-width: 800px) {
+    .container {
+        height: 30vh;
+    }
+    .tekst {
+        font-size: 2vh;
+    }
+    .headline {
+        font-size: 3vh;
+    }
+    #introduction {
+        font-size: 2vh;
+    }
+    #survey{
+        font-size:2vh;
+    }
+    .text {
+        font-size: 2vh;
+    }
+    .menuelement{
+        display: flex;
+        flex-direction: column;
+    }
+}
+.vinyl-container {
+    width: 150px;
+    height: 150px;
+    margin: 50px auto;
+    animation: rotate-record 10s linear infinite;
+}
+
+@keyframes rotate-record {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+svg {
+    width: 100%;
+    height: 100%;
+}
